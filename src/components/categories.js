@@ -6,6 +6,8 @@ import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar } from '@material-ui/core';
 import { categorySwap } from '../store/categories';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Link from '@material-ui/core/Link';
 
 import { connect } from 'react-redux';
 
@@ -24,18 +26,13 @@ const Categories = props => {
       {console.log('props', props)}
       <AppBar position="static">
         <Toolbar> 
-          <Typography variant="h6" classname={classes.categories}>Browse our Categories</Typography>
-          <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-            {props.categories.categories.map(category =>
-              <Button
-              key={category._id}
-              color="primary"
-              onClick={() => props.changeCategory(category.name)}
-              >
-                {category.displayName || category.name}
-              </Button>
+          <Breadcrumbs aria-label="breadcrumb">
+          {props.categories.categories.map(category =>
+            <Link color="inherit" href="/" onClick={() => props.changeCategory(category.name)}>
+              {category.displayName || category.name}
+            </Link>
             )}
-          </ButtonGroup>
+          </Breadcrumbs>
         </Toolbar>
       </AppBar>
     </div>
