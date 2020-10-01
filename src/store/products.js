@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+import axios from 'axios';
 
 // electronics, jewelry, clothing
 const initialState = {
@@ -30,11 +30,15 @@ const initialState = {
 
 export const getProducts = () => {
   return async function (dispatch) {
-    const response = initialState.products;
+
+    // const response = initialState.products;
+    const url = `https://fakestoreapi.com`;
+    const response = await axios.get(`${url}/products?limit=9`);
+    console.log('RESPOSE???', response.data);
 
     dispatch({
       type: 'GET_PRODUCTS',
-      payload: response,
+      payload: response.data,
     });
   };
 };
@@ -43,6 +47,9 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case 'GET_PRODUCTS':
+      return { ...state, products: payload };
+
     default:
       return state;
   }
