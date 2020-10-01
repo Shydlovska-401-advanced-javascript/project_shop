@@ -5,6 +5,7 @@ import { Toolbar } from '@material-ui/core';
 // import { Button } from '@material-ui/core';
 import { Typography  } from '@material-ui/core';
 
+
 const Header = () => {
     return (
         <AppBar position="static">
@@ -12,7 +13,6 @@ const Header = () => {
           <Typography variant="h6" >
             <h2>Project Shop</h2>
           </Typography>
-         
         </Toolbar>
       </AppBar>
     );
