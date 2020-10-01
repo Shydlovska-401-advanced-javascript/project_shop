@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" >Project Shop</Typography>
+          <Typography variant="h2" >Project Shop</Typography>
          
         </Toolbar>
       </AppBar>
