@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getProducts } from '../store/products';
+import { addToCart } from '../store/cart';
 // import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -44,17 +47,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const Products = () => {
+const Products = ({ getProducts, products, addToCart }) => {
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]); // is this what we listen for?
+
   const classes = useStyles();
   return (
     <div>
       <Container className={classes.cardGrid} maxWidth="md">
         {/* End hero unit */}
         <Grid container spacing={4}>
-          {cards.map(card => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
-              <Card className={classes.card}>
+          {products.map(product => (
+            <Grid item key={product.title} xs={12} sm={6} md={4}>
+              <Card className={classes.product}>
                 <CardMedia
                   className={classes.cardMedia}
                   image="https://source.unsplash.com/random"
@@ -62,15 +68,16 @@ const Products = () => {
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Heading
+                    {product.title}
                   </Typography>
-                  <Typography>
-                    This is a media card. You can use this section to describe
-                    the content.
-                  </Typography>
+                  <Typography>{product.description}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => addToCart(product)}
+                  >
                     ADD TO CART
                   </Button>
                   <Button size="small" color="primary">
@@ -86,4 +93,13 @@ const Products = () => {
   );
 };
 
-export default Products;
+const mapStateToProps = state => {
+  return {
+    // activeCategory: state.categories.activeCategory,
+    products: state.products.products,
+  };
+};
+
+const mapDispatchToProps = { getProducts, addToCart };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
