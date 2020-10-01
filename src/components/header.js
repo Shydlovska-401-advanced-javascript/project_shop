@@ -7,16 +7,15 @@ import { Toolbar } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
 const Header = () => {
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h3" component="h3">
-          Project Shop
-        </Typography>
-      </Toolbar>
-    </AppBar>
-  );
-};
+    return (
+        <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h2" >Project Shop</Typography>
+         
+        </Toolbar>
+      </AppBar>
+    );
+}
 
 const mapStateToProps = state => {
   return {
