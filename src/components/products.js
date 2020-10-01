@@ -61,7 +61,7 @@ const Products = ({ getProducts, products }) => {
         {/* End hero unit */}
         <Grid container spacing={4}>
           {products.map(product => (
-            <Grid item key={product.name} xs={12} sm={6} md={4}>
+            <Grid item key={product.id} xs={12} sm={6} md={4}>
               <Card className={classes.product}>
                 <CardMedia
                   className={classes.cardMedia}
@@ -70,7 +70,7 @@ const Products = ({ getProducts, products }) => {
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" component="h2">
-                    {product.name}
+                    {product.title}
                   </Typography>
                   <Typography>{product.description}</Typography>
                 </CardContent>
