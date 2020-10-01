@@ -46,9 +46,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-// const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-// const cards = [1, 2, 3];
-
 const Products = ({ getProducts, products }) => {
   useEffect(() => {
     getProducts();
@@ -61,7 +58,7 @@ const Products = ({ getProducts, products }) => {
         {/* End hero unit */}
         <Grid container spacing={4}>
           {products.map(product => (
-            <Grid item key={product.id} xs={12} sm={6} md={4}>
+            <Grid item key={product.title} xs={12} sm={6} md={4}>
               <Card className={classes.product}>
                 <CardMedia
                   className={classes.cardMedia}
