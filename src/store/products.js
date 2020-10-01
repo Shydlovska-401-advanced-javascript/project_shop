@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-
 import axios from 'axios';
 
 // electronics, jewelry, clothing
@@ -32,6 +30,7 @@ const initialState = {
 
 export const getProducts = () => {
   return async function (dispatch) {
+
     // const response = initialState.products;
     const url = `https://fakestoreapi.com`;
     const response = await axios.get(`${url}/products?limit=9`);

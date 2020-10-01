@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getProducts } from '../store/products';
+import { addToCart } from '../store/cart';
 // import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -46,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Products = ({ getProducts, products }) => {
+const Products = ({ getProducts, products, addToCart }) => {
   useEffect(() => {
     getProducts();
   }, [getProducts]); // is this what we listen for?
@@ -72,7 +73,11 @@ const Products = ({ getProducts, products }) => {
                   <Typography>{product.description}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => addToCart(product)}
+                  >
                     ADD TO CART
                   </Button>
                   <Button size="small" color="primary">
@@ -95,6 +100,6 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = { getProducts };
+const mapDispatchToProps = { getProducts, addToCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
