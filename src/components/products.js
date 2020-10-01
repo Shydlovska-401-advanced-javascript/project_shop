@@ -47,11 +47,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-// const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-// const cards = [1, 2, 3];
-
-const Products = ({ getProducts, products ,addToCart}) => {
+const Products = ({ getProducts, products, addToCart }) => {
   useEffect(() => {
     getProducts();
   }, [getProducts]); // is this what we listen for?
@@ -63,9 +59,8 @@ const Products = ({ getProducts, products ,addToCart}) => {
         {/* End hero unit */}
         <Grid container spacing={4}>
           {products.map(product => (
-            <Grid item key={product.id} xs={12} sm={6} md={4}>
+            <Grid item key={product.title} xs={12} sm={6} md={4}>
               <Card className={classes.product}>
-
                 <CardMedia
                   className={classes.cardMedia}
                   image="https://source.unsplash.com/random"
@@ -78,7 +73,11 @@ const Products = ({ getProducts, products ,addToCart}) => {
                   <Typography>{product.description}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary" onClick={() => addToCart(product)}>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => addToCart(product)}
+                  >
                     ADD TO CART
                   </Button>
                   <Button size="small" color="primary">
@@ -94,7 +93,6 @@ const Products = ({ getProducts, products ,addToCart}) => {
   );
 };
 
-
 const mapStateToProps = state => {
   return {
     // activeCategory: state.categories.activeCategory,
@@ -105,4 +103,3 @@ const mapStateToProps = state => {
 const mapDispatchToProps = { getProducts, addToCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
-
