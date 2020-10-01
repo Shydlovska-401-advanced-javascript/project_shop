@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getProducts } from '../store/products';
+import { addToCart } from '../store/cart';
 // import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -46,10 +47,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 // const cards = [1, 2, 3];
 
-const Products = ({ getProducts, products }) => {
+const Products = ({ getProducts, products ,addToCart}) => {
   useEffect(() => {
     getProducts();
   }, [getProducts]); // is this what we listen for?
@@ -63,6 +65,7 @@ const Products = ({ getProducts, products }) => {
           {products.map(product => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
               <Card className={classes.product}>
+
                 <CardMedia
                   className={classes.cardMedia}
                   image="https://source.unsplash.com/random"
@@ -75,7 +78,7 @@ const Products = ({ getProducts, products }) => {
                   <Typography>{product.description}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button size="small" color="primary" onClick={() => addToCart(product)}>
                     ADD TO CART
                   </Button>
                   <Button size="small" color="primary">
@@ -91,6 +94,7 @@ const Products = ({ getProducts, products }) => {
   );
 };
 
+
 const mapStateToProps = state => {
   return {
     // activeCategory: state.categories.activeCategory,
@@ -98,6 +102,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = { getProducts };
+const mapDispatchToProps = { getProducts, addToCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
+
