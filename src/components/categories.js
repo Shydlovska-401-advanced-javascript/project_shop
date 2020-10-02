@@ -11,40 +11,42 @@ import Link from '@material-ui/core/Link';
 
 import { connect } from 'react-redux';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   categories: {
     margin: theme.spacing(3),
   },
 }));
 
-const Categories = props => {  
+const Categories = props => {
+  const classes = useStyles();
 
-  const classes = useStyles();  
-  
   return (
-    <div className='categories'>
-      {console.log('props', props)}
+    <div className="categories">
       <AppBar position="static">
-        <Toolbar> 
+        <Toolbar>
           <Breadcrumbs aria-label="breadcrumb">
-          {props.categories.categories.map(category =>
-            <Link color="inherit" href="/" onClick={() => props.changeCategory(category.name)}>
-              {category.displayName || category.name}
-            </Link>
-            )}
+            {props.categories.categories.map(category => (
+              <Link
+                color="inherit"
+                href="/"
+                onClick={() => props.categorySwap(category.name)}
+              >
+                {category.displayName || category.name}
+              </Link>
+            ))}
           </Breadcrumbs>
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
 
 const mapStateToProps = state => {
   return {
     categories: state.categories,
-  }
-}
+  };
+};
 
-const mapDispatchToProps = { categorySwap }
+const mapDispatchToProps = { categorySwap };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
