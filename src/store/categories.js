@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
   }
 };
 
-export const categorySwap = (name) => {
+export const changeCategory = (name) => {
   return {
     type: 'CHANGE',
     payload: name,

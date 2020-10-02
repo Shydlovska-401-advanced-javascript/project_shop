@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar } from '@material-ui/core';
-import { categorySwap } from '../store/categories';
+import { changeCategory } from '../store/categories';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 
@@ -26,12 +26,14 @@ const Categories = props => {
       {console.log('props', props)}
       <AppBar position="static">
         <Toolbar> 
-          <Breadcrumbs aria-label="breadcrumb">
-          {props.categories.categories.map(category =>
-            <Link color="inherit" href="/" onClick={() => props.changeCategory(category.name)}>
+          <Breadcrumbs separator='|' aria-label="breadcrumb">
+          {props.categories.categories.map(category => {
+            const isActive = category.name === props.categories.activeCategory.name
+            return (
+            <Link key={category._id} color={isActive ? 'primary' : 'inherit'} href="#" onClick={() => props.changeCategory(category.name)}>
               {category.displayName || category.name}
-            </Link>
-            )}
+          </Link>
+          )})}
           </Breadcrumbs>
         </Toolbar>
       </AppBar>
@@ -45,6 +47,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = { categorySwap }
+const mapDispatchToProps = { changeCategory }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
