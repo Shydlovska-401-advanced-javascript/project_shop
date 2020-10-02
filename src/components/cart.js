@@ -4,7 +4,6 @@ import { deleteFromCart } from '../store/cart.js';
 import Button from '@material-ui/core/Button';
 
 function SimpleCart(props) {
-  // console.log(props, 'cart')
   return (
     <>
       <Button size="small" color="primary">

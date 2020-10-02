@@ -2,7 +2,7 @@
 const initialState = {
   categories: [
     { name: 'electronics', displayName: 'Electronics' },
-    { name: 'jewlery', displayName: 'Jewlery' },
+    { name: 'jewelery', displayName: 'Jewelery' },
     { name: 'men clothing', displayName: 'Clothing' },
   ],
   activeCategory: '',
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
   }
 };
 
-export const changeCategory = (name) => {
+export const changeCategory = name => {
   return {
     type: 'CHANGE',
     payload: name,
