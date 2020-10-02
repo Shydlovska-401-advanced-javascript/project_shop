@@ -1,9 +1,9 @@
 /* eslint-disable indent */
 const initialState = {
   categories: [
-    { name: 'electronics', displayName: 'Electronics'},
-    { name: 'jewlery', displayName: 'Jewlery'},
-    { name: 'clothing', displayName: 'Clothing'},
+    { name: 'electronics', displayName: 'Electronics' },
+    { name: 'jewelery', displayName: 'Jewelery' },
+    { name: 'men clothing', displayName: 'Clothing' },
   ],
   activeCategory: '',
 };
@@ -12,14 +12,14 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case 'CHANGE':
-      return {...state, activeCategory: payload};
+      return { ...state, activeCategory: payload };
 
     default:
       return state;
   }
 };
 
-export const categorySwap = (name) => {
+export const changeCategory = name => {
   return {
     type: 'CHANGE',
     payload: name,

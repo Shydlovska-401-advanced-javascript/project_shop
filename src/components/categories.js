@@ -5,46 +5,46 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar } from '@material-ui/core';
-import { categorySwap } from '../store/categories';
+import { changeCategory } from '../store/categories';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 
 import { connect } from 'react-redux';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   categories: {
     margin: theme.spacing(3),
   },
 }));
 
-const Categories = props => {  
+const Categories = props => {
+  const classes = useStyles();
 
-  const classes = useStyles();  
-  
   return (
-    <div className='categories'>
-      {console.log('props', props)}
+    <div className="categories">
       <AppBar position="static">
         <Toolbar> 
-          <Breadcrumbs aria-label="breadcrumb">
-          {props.categories.categories.map(category =>
-            <Link color="inherit" href="/" onClick={() => props.changeCategory(category.name)}>
+          <Breadcrumbs separator='|' aria-label="breadcrumb">
+          {props.categories.categories.map(category => {
+            const isActive = category.name === props.categories.activeCategory.name
+            return (
+            <Link key={category._id} color={isActive ? 'primary' : 'inherit'} href="#" onClick={() => props.changeCategory(category.name)}>
               {category.displayName || category.name}
-            </Link>
-            )}
+          </Link>
+          )})}
           </Breadcrumbs>
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
 
 const mapStateToProps = state => {
   return {
     categories: state.categories,
-  }
-}
+  };
+};
 
-const mapDispatchToProps = { categorySwap }
+const mapDispatchToProps = { changeCategory }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
