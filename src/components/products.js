@@ -47,46 +47,53 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Products = ({ getProducts, products, addToCart }) => {
+const Products = ({ getProducts, products, active, addToCart }) => {
   useEffect(() => {
     getProducts();
   }, [getProducts]); // is this what we listen for?
 
   const classes = useStyles();
+  console.log('PRODUCTS>>>>>', products);
+  console.log('ACTIVE CATEGORY', active);
+
   return (
     <div>
       <Container className={classes.cardGrid} maxWidth="md">
-        {/* End hero unit */}
         <Grid container spacing={4}>
-          {products.map(product => (
-            <Grid item key={product.title} xs={12} sm={6} md={4}>
-              <Card className={classes.product}>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image="https://source.unsplash.com/random"
-                  title="Image title"
-                />
-                <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {product.title}
-                  </Typography>
-                  <Typography>{product.description}</Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    size="small"
-                    color="primary"
-                    onClick={() => addToCart(product)}
-                  >
-                    ADD TO CART
-                  </Button>
-                  <Button size="small" color="primary">
-                    DETAILS
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
+          {products.map(product => {
+            if (product.category === active) {
+              return (
+                <Grid item key={product.title} xs={12} sm={6} md={4}>
+                  <Card className={classes.product}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image="https://source.unsplash.com/random"
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {product.title}
+                      </Typography>
+                      <Typography>{product.description}</Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={() => addToCart(product)}
+                      >
+                        ADD TO CART
+                      </Button>
+                      <Button size="small" color="primary">
+                        DETAILS
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            }
+            // if ends here
+          })}
         </Grid>
       </Container>
     </div>
@@ -95,8 +102,8 @@ const Products = ({ getProducts, products, addToCart }) => {
 
 const mapStateToProps = state => {
   return {
-    // activeCategory: state.categories.activeCategory,
     products: state.products.products,
+    active: state.categories.activeCategory,
   };
 };
 

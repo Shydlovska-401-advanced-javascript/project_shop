@@ -11,19 +11,17 @@ import Link from '@material-ui/core/Link';
 
 import { connect } from 'react-redux';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   categories: {
     margin: theme.spacing(3),
   },
 }));
 
-const Categories = props => {  
+const Categories = props => {
+  const classes = useStyles();
 
-  const classes = useStyles();  
-  
   return (
-    <div className='categories'>
-      {console.log('props', props)}
+    <div className="categories">
       <AppBar position="static">
         <Toolbar> 
           <Breadcrumbs separator='|' aria-label="breadcrumb">
@@ -39,13 +37,13 @@ const Categories = props => {
       </AppBar>
     </div>
   );
-}
+};
 
 const mapStateToProps = state => {
   return {
     categories: state.categories,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = { changeCategory }
 

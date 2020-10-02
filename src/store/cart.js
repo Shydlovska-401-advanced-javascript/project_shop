@@ -1,17 +1,16 @@
+/* eslint-disable indent */
 import _ from 'lodash';
 
 const initialState = {
   products: [],
   total: 0,
-  
-}
+};
 
-export default (state = initialState, action) =>{
+export default (state = initialState, action) => {
   const { type, payload } = action;
   let total;
   let products;
   let id = Math.random();
-
 
   switch(type) {
       case 'ADD':
@@ -30,24 +29,21 @@ export default (state = initialState, action) =>{
           // products = state.products.filter(item => item.id !== payload.id);
           // console.log(products, "whats left");
           // return {products, total}
-  default:
-      return state;
-  }   
- 
-}
+      default:
+        return state;
+  }
+};
 
-
-export const addToCart = (product) => {
+export const addToCart = product => {
   return {
-      type: 'ADD',
-      payload: product,
-    
+    type: 'ADD',
+    payload: product,
   };
 };
 
-export const deleteFromCart = (product) => {
+export const deleteFromCart = product => {
   return {
-      type: 'DELETE',
-      payload: product,
-  }
-}
+    type: 'DELETE',
+    payload: product,
+  };
+};
